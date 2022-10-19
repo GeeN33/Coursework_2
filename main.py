@@ -171,13 +171,15 @@ def update_set_fk_products(connection, dict_products:dict)->None:
             print('update_set_fk_products')
     except Exception as ex:
         print(ex)
-
-if __name__ == '__main__':
+def name():
 
     dict_products = {}
     list_suppliers = []
     parsing_json(list_suppliers, dict_products)
     connection = db_connect()
+    if not connection:
+        print('нет соединения с базой данных')
+        return
     filling_db(connection)
     create_table(connection)
     insert_into_suppliers(connection, list_suppliers)
@@ -185,4 +187,8 @@ if __name__ == '__main__':
     update_set_fk_products(connection, dict_products)
 
     if connection:
-        connection.close()
+         connection.close()
+
+
+if __name__ == '__main__':
+    name()
